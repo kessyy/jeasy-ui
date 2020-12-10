@@ -6,8 +6,8 @@
 
 	include 'conn.php';
 	
-	$rs = mysql_query("select count(*) from orders");
-	$row = mysql_fetch_row($rs);
+	$rs = mysqli_query("select count(*) from orders");
+	$row = mysqli_fetch_row($rs);
 	$result["total"] = $row[0];
 	$rs = mysql_query("select * from orders limit $offset,$rows");
 	

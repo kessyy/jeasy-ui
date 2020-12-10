@@ -13,7 +13,7 @@
 <body>
 	
 	<table id="dg" title="Item Sales Report" class="easyui-datagrid" style="width:700px;height:250px"
-			url="get_users.php"
+			url="get_order.php"
 			toolbar="#toolbar" pagination="true"
 			rownumbers="true" fitColumns="true" singleSelect="true">
 		<thead>
@@ -32,12 +32,12 @@
     <br/>
         Date From: <input id="dd" type="text" class="easyui-datebox">
         To: <input id="dd" type="text" class="easyui-datebox">
-        <a id="btn" href="#" class="easyui-linkbutton" >Search</a>
+        <a id="btn" href="#" class="easyui-linkbutton" onClick="searchOrder" >Search</a>
         <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-print'">Print Report</a>
     <br/>
-		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" onclick="editUser()">View/Update</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="newUser()">New Item</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="destroyUser()">Delete</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" onclick="editOrder()">View/Update</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="newOrder()">New Item</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="deleteOrder()">Delete</a>
         Search: <input class="easyui-textbox"  style="width:250px">
     <br/>
 	</div>
@@ -63,6 +63,9 @@
             <div style="margin-bottom:10px">
 				<input name="t_amount" class="easyui-textbox" required="true" label="Total Amount:" style="width:100%">
 			</div>
+			<div style="margin-bottom:10px">
+				<input name="vat" class="easyui-textbox" required="true" label=" VAT:" style="width:100%">
+			</div>
 		</form>
 	</div>
 	<div id="dlg-buttons">
@@ -71,12 +74,12 @@
 	</div>
 	<script type="text/javascript">
 		var url;
-		function newUser(){
+		function newOrder(){
 			$('#dlg').dialog('open').dialog('center').dialog('setTitle','New Order');
 			$('#fm').form('clear');
 			url = 'save_order.php';
 		}
-		function editUser(){
+		function editOrder(){
 			var row = $('#dg').datagrid('getSelected');
 			if (row){
 				$('#dlg').dialog('open').dialog('center').dialog('setTitle','Edit Order');
@@ -104,7 +107,7 @@
 				}
 			});
 		}
-		function deleteorder(){
+		function deleteOrder(){
 			var row = $('#dg').datagrid('getSelected');
 			if (row){
 				$.messager.confirm('Confirm','Are you sure you want to Delete this order?',function(r){
@@ -123,6 +126,11 @@
 				});
 			}
 		}
+		function searchOrder(){
+    $('#dg').datagrid('load',{
+        description: $('#description').val()
+    });
+}
 	</script>
 </body>
 </html>

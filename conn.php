@@ -1,9 +1,13 @@
 <?php
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$db = 'hotel';
 
-$conn = @mysql_connect('localhost','root','root');
+$conn = mysqli_connect($servername,$username,$password, $db);
 if (!$conn) {
-	die('Could not connect: ' . mysql_error());
+	die('Could not connect: ' . mysqli_connect_error());
 }
-mysql_select_db('hotel', $conn);
+echo 'connected successfully';
 
 ?>

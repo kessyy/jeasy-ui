@@ -14,10 +14,10 @@ include 'conn.php';
 
 // if (filter_var($id, FILTER_VALIDATE_ID)){
 	$sql = "insert into orders(date,rct,description,quantity,unit_price,t_amount,vat) values('$date','$rct','$description','$quantity''$unit_price','$t_amount','$vat')";
-	$result = @mysql_query($sql);
+	$result = mysqli_query($conn, $sql);
 	if ($result){
 		echo json_encode(array(
-			'id' => mysql_insert_id(),
+			'id' => mysqli_insert_id($link()),
 			'date' => $date,
 			'rct' => $rct,
 			'description' => $description,

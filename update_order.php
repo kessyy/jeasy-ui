@@ -13,7 +13,7 @@ $vat = htmlspecialchars($_REQUEST['vat']);
 include 'conn.php';
 
 $sql = "update orders set date='$date',rct='$rct',description='$description',quantity='$quantity',unit_price='$unit_price',t_amount='$t_amount',vat='$vat' where id=$id";
-$result = @mysql_query($sql);
+$result = mysqli_query($conn, $sql);
 if ($result){
 	echo json_encode(array(
 		'id' => $id,
