@@ -30,15 +30,15 @@
 	</table>
 	<div id="toolbar">
     <br/>
-        Date From: <input id="dd" type="text" class="easyui-datebox">
-        To: <input id="dd" type="text" class="easyui-datebox">
-        <a id="btn" href="#" class="easyui-linkbutton" onClick="searchOrder" >Search</a>
-        <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-print'">Print Report</a>
+        Date From: <input id="from_date" type="text" class="easyui-datebox">
+        To: <input id="to_date" type="text" class="easyui-datebox">
+        <a id="btn" href="javascript:void(0)" class="easyui-linkbutton" onClick="searchOrders" >Search</a>
+        <a id="btn" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-print'">Print Report</a>
     <br/>
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" onclick="editOrder()">View/Update</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" onclick="newOrder()">New Item</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" onclick="deleteOrder()">Delete</a>
-        Search: <input class="easyui-textbox"  style="width:250px">
+        Search: <input class="easyui-textbox" onkeyup="getOrder"  style="width:250px">
     <br/>
 	</div>
 	
@@ -126,10 +126,20 @@
 				});
 			}
 		}
-		function searchOrder(){
-    $('#dg').datagrid('load',{
-        description: $('#description').val()
-    });
+		function searchOrders(){
+    	$('#dg').datagrid('load',{
+     		from_date: $('#from_date').val(),
+        	to_date: $('#to_date').val(),          
+    		});
+			url = 'search_order.php';
+		}
+		function getOrder(){
+			$('#dg').datagrid('load',{
+				description: $('#description').val(),
+			});
+			url = 'get_order.php';
+		}
+</script>
 }
 	</script>
 </body>
